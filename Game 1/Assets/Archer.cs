@@ -36,8 +36,6 @@ public class Archer : MonoBehaviour
         //Debug.Log(result.magnitude);
         
         result.Normalize();
-
-        
         
     }
     private void FixedUpdate()

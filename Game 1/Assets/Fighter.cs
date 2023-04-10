@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Fighter : MonoBehaviour
 {
     Rigidbody2D rb;
+    ColliderDistance2D cd;
 
-    public float horizontal;
-    public float speed = 1f;
+    public Collider2D playerCollider;
+    public float distance;
+
+    public Vector2 fighter;
+    public Vector2 player;
+    public Vector2 direction;
+
+    public float speed = 5f;
 
     public float jumpV = 15f;
     float jV;
@@ -15,7 +22,6 @@ public class Movement : MonoBehaviour
     public bool canJump = true;
     float intGravity;
     public float downGravity;
-
 
     void Start()
     {
@@ -25,33 +31,40 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+        //Calculating Distance to Player
+        cd = rb.Distance(playerCollider);
+        distance = cd.distance;
 
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        //Calculating Player Direction
+        fighter = transform.position;
+        player = playerCollider.transform.position;
+
+        direction = player - fighter;
+
+        //Debug.Log(result.magnitude);
+
+        direction.Normalize();
+
+        if (direction.y > 0.5f && canJump)
         {
             jV = jumpV - rb.velocity.y;
             canJump = false;
+            rb.gravityScale = intGravity;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (direction.y < -0.5f)
         {
             rb.gravityScale = downGravity;
         }
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            rb.gravityScale = intGravity;
-        }
-
     }
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y + jV);
+        rb.velocity = new Vector2(direction.x * speed, rb.velocity.y + jV);
 
         jV = 0f;
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Jumpable Floor")
+        if (collision.tag == "Jumpable Floor")
         {
             canJump = true;
         }

@@ -6,9 +6,14 @@ public class Movement : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    public float jf = 500;
     public float horizontal;
-    public float speed = 1;
+    public float speed = 1f;
+
+    public float jumpV = 15f;
+    float jV;
+
+    public bool canJump = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -17,13 +22,32 @@ public class Movement : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
-            rb.AddForce(new Vector2(0, jf));
+            jV = jumpV - rb.velocity.y;
+            canJump = false;
         }
-    }
+}
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y + jV);
+
+        jV = 0f;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Jumpable")
+        {
+            canJump = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Jumpable")
+        {
+            canJump = false;
+        }
     }
 }

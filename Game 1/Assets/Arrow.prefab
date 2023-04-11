@@ -95,6 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c580ff83b42fd904fb9106768fcf3118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerToHit:
+    serializedVersion: 2
+    m_Bits: 129
   destroyTime: 4
 --- !u!1 &4917032385421071113
 GameObject:

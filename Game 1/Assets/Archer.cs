@@ -47,6 +47,7 @@ public class Archer : MonoBehaviour
     void Shoot()
     {
         GameObject newArrow = Instantiate(arrow, shotPoint.position, bow.rotation);
+        Physics2D.IgnoreCollision(newArrow.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         newArrow.GetComponent<Rigidbody2D>().velocity = bow.right * launchForce;
 
         StartCoroutine(Recharge());

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bow : MonoBehaviour
 {
+    public GameObject shooter;
     public GameObject arrow;
     public Transform shotPoint;
 
@@ -36,6 +37,7 @@ public class Bow : MonoBehaviour
     void Shoot()
     {
         GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
+        Physics2D.IgnoreCollision(newArrow.GetComponent<Collider2D>(), shooter.GetComponent<Collider2D>());
         newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
 
         StartCoroutine(Recharge());

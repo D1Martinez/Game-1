@@ -6,21 +6,20 @@ public class Movement : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    public float horizontal;
-    public float speed = 1f;
+    float horizontal;
+    public float speed = 7f;
 
-    public float jumpV = 15f;
+    public float jumpVelocity = 15f;
     float jV;
 
-    public bool canJump = true;
-    float intGravity;
-    public float downGravity;
-
+    public float regularGravity = 3f;
+    public float downGravity = 6.5f;
+    bool canJump = true;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        intGravity = rb.gravityScale;
+        rb.gravityScale = regularGravity;
     }
 
     void Update()
@@ -29,7 +28,7 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
-            jV = jumpV - rb.velocity.y;
+            jV = jumpVelocity - rb.velocity.y;
             canJump = false;
         }
         if (Input.GetKey(KeyCode.S))
@@ -38,7 +37,7 @@ public class Movement : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
-            rb.gravityScale = intGravity;
+            rb.gravityScale = regularGravity;
         }
 
     }

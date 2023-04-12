@@ -8,9 +8,9 @@ public class Archer : MonoBehaviour
 
     public Collider2D playerCollider;
 
-    public Vector2 archer;
-    public Vector2 player;
-    public Vector2 direction;
+    Vector2 archer;
+    Vector2 player;
+    Vector2 direction;
 
     public Transform bow;
     public Transform shotPoint;
@@ -23,6 +23,8 @@ public class Archer : MonoBehaviour
     public int ammo;
     public float rechargeRate = 3f;
     public float launchForce;
+    //public float bloom = 2f;
+    //float spray;
 
     void Start()
     {
@@ -43,10 +45,15 @@ public class Archer : MonoBehaviour
         {
             Shoot();
         }
+
+        //If physics ray hits player, then update bow and shoot, upon loss of sight make them
+        //return to rest position
     }
     void Shoot()
     {
-        GameObject newArrow = Instantiate(arrow, shotPoint.position, bow.rotation);
+        //spray = Random.Range(-bloom, bloom);
+        
+        GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
         Physics2D.IgnoreCollision(newArrow.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         newArrow.GetComponent<Rigidbody2D>().velocity = bow.right * launchForce;
 

@@ -13,6 +13,7 @@ public class Bow : MonoBehaviour
     public int maxAmmo = 3;
     public int ammo;
     public float rechargeRate = 3f;
+    bool isRecharging = false;
 
     Vector2 bowPosition;
     Vector2 mousePosition;
@@ -20,6 +21,7 @@ public class Bow : MonoBehaviour
     private void Start()
     {
         ammo = maxAmmo;
+        isRecharging = false;
     }
 
     private void Update()
@@ -33,6 +35,10 @@ public class Bow : MonoBehaviour
         {
             Shoot();
         }
+        if(ammo < maxAmmo && !isRecharging)
+        {
+            StartCoroutine(Recharge());
+        }
     }
     void Shoot()
     {
@@ -40,14 +46,15 @@ public class Bow : MonoBehaviour
         Physics2D.IgnoreCollision(newArrow.GetComponent<Collider2D>(), shooter.GetComponent<Collider2D>());
         newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
 
-        StartCoroutine(Recharge());
-
         ammo--;
     }
     IEnumerator Recharge()
     {
+        isRecharging = true;
+
         yield return new WaitForSeconds(rechargeRate);
 
+        isRecharging = false;
         ammo++;
     }
 }

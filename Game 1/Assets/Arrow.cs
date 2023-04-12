@@ -31,7 +31,10 @@ public class Arrow : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if(collision.gameObject.layer != layerToHit)
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            //Death Animation, Fade  to black, Restart level.
+        }
 
         hasHit = true;
 

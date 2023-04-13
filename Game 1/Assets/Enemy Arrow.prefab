@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4917032385166296579}
   - component: {fileID: -2732084469331840519}
   - component: {fileID: 4917032385166296577}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Enemy Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.035, y: 0}
+  m_Offset: {x: 0.275, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -60,7 +60,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.875, y: 0.15}
+  m_Size: {x: 0.4, y: 0.15}
   m_EdgeRadius: 0
 --- !u!50 &-2732084469331840519
 Rigidbody2D:
@@ -95,9 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c580ff83b42fd904fb9106768fcf3118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerToHit:
-    serializedVersion: 2
-    m_Bits: 9
   destroyTime: 4
 --- !u!1 &4917032385421071113
 GameObject:
@@ -173,7 +170,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.4020226, g: 0.8207547, b: 0.3445621, a: 1}
+  m_Color: {r: 0.81960785, g: 0.34509805, b: 0.6876268, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

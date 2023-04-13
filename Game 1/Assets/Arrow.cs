@@ -35,6 +35,12 @@ public class Arrow : MonoBehaviour
         {
             //Death Animation, Fade  to black, Restart level.
         }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //Kill enemy
+            collision.gameObject.GetComponent<Health>().EnemyDies();
+            Destroy(gameObject, 0.5f);
+        }
 
         hasHit = true;
 

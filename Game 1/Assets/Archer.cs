@@ -21,15 +21,19 @@ public class Archer : MonoBehaviour
 
     public int maxAmmo = 3;
     public int ammo;
-    public float rechargeRate = 3f;
+    public float reloadTime = 3f;
     public float launchForce;
     //public float bloom = 2f;
     //float spray;
+    public float maxDelay = 0.5f;
+    float delay;
+    public LayerMask layers;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         ammo = maxAmmo;
+        delay = Random.Range(0f, maxDelay);
     }
 
     void Update()
@@ -40,8 +44,10 @@ public class Archer : MonoBehaviour
         direction = player - archer;
 
         bow.right = direction.normalized;
-        
-        if(ammo > 0 && nextFire < Time.time)
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 999f, layers);
+
+        if(ammo > 0 && nextFire + delay < Time.time && hit.collider.CompareTag("Player"))
         {
             Shoot();
         }
@@ -52,19 +58,20 @@ public class Archer : MonoBehaviour
     void Shoot()
     {
         //spray = Random.Range(-bloom, bloom);
-        
+
         GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
         Physics2D.IgnoreCollision(newArrow.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         newArrow.GetComponent<Rigidbody2D>().velocity = bow.right * launchForce;
 
-        StartCoroutine(Recharge());
+        StartCoroutine(Reload());
 
         ammo--;
         nextFire = Time.time + firerate;
+        delay = Random.Range(0f, maxDelay);
     }
-    IEnumerator Recharge()
+    IEnumerator Reload()
     {
-        yield return new WaitForSeconds(rechargeRate);
+        yield return new WaitForSeconds(reloadTime);
 
         ammo++;
     }

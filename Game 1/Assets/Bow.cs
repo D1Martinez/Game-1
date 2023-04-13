@@ -12,8 +12,8 @@ public class Bow : MonoBehaviour
 
     public int maxAmmo = 3;
     public int ammo;
-    public float rechargeRate = 3f;
-    bool isRecharging = false;
+    public float reloadTime = 3f;
+    bool isReloading = false;
 
     Vector2 bowPosition;
     Vector2 mousePosition;
@@ -21,7 +21,7 @@ public class Bow : MonoBehaviour
     private void Start()
     {
         ammo = maxAmmo;
-        isRecharging = false;
+        isReloading = false;
     }
 
     private void Update()
@@ -35,9 +35,9 @@ public class Bow : MonoBehaviour
         {
             Shoot();
         }
-        if(ammo < maxAmmo && !isRecharging)
+        if(ammo < maxAmmo && !isReloading)
         {
-            StartCoroutine(Recharge());
+            StartCoroutine(Reload());
         }
     }
     void Shoot()
@@ -48,13 +48,13 @@ public class Bow : MonoBehaviour
 
         ammo--;
     }
-    IEnumerator Recharge()
+    IEnumerator Reload()
     {
-        isRecharging = true;
+        isReloading = true;
 
-        yield return new WaitForSeconds(rechargeRate);
+        yield return new WaitForSeconds(reloadTime);
 
-        isRecharging = false;
+        isReloading = false;
         ammo++;
     }
 }

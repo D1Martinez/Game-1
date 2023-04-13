@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2659647666419089615}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 2659647666692065680}
   - component: {fileID: 2659647666692065681}
   - component: {fileID: 2659647666692065682}
+  - component: {fileID: 6735433316610915425}
   m_Layer: 3
   m_Name: Archer
   m_TagString: Untagged
@@ -95,17 +96,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 0}
-  archer: {x: 0, y: 0}
-  player: {x: 0, y: 0}
-  direction: {x: 0, y: 0}
   bow: {fileID: 2659647666742056332}
   shotPoint: {fileID: 2659647666419089612}
   arrow: {fileID: 4917032385166296578, guid: 04441a47a99becd4fb4585a98ac213c5, type: 3}
   firerate: 1
   maxAmmo: 5
   ammo: 0
-  rechargeRate: 3
+  reloadTime: 3
   launchForce: 20
+  maxDelay: 0.5
+  layers:
+    serializedVersion: 2
+    m_Bits: 520
+--- !u!114 &6735433316610915425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2659647666692065685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ec2c2a39b1dde41b29c9ba5a230fbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2659647666742056335
 GameObject:
   m_ObjectHideFlags: 0

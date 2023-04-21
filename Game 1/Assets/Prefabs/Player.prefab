@@ -363,8 +363,10 @@ MonoBehaviour:
   shotPoint: {fileID: 7048530903007860540}
   sr: {fileID: 7048530902568177146}
   emptyBow: {fileID: 21300000, guid: c7170b1a5f0efba47bbf59633f077734, type: 3}
-  loadedBow: {fileID: 21300000, guid: 288e9bff51858de4a9d0ff382414d0ec, type: 3}
-  launchForce: 16
+  notPulled: {fileID: 0}
+  semiPulled: {fileID: 0}
+  fullyPulled: {fileID: 21300000, guid: 288e9bff51858de4a9d0ff382414d0ec, type: 3}
+  launchForce: 25
   maxAmmo: 4
   ammo: 0
   reloadTime: 2

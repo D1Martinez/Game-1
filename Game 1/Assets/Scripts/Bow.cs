@@ -8,10 +8,9 @@ public class Bow : MonoBehaviour
     public GameObject arrow;
     public Transform shotPoint;
     public SpriteRenderer sr;
-    public Sprite emptyBow;
-    public Sprite loadedBow;
+    public Sprite emptyBow, notPulled, semiPulled, fullyPulled;
 
-    public float launchForce;
+    public float launchForce = 25f;
 
     public int maxAmmo = 3;
     public int ammo;
@@ -24,6 +23,10 @@ public class Bow : MonoBehaviour
 
     public float fireDelay = 0.25f;
     float nextFire = 0f;
+
+    bool holding = false;
+    float strength = 0f;
+
     private void Start()
     {
         ammo = maxAmmo;
@@ -40,28 +43,45 @@ public class Bow : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && ammo > 0 && nextFire < Time.time)
         {
-            Shoot();
+            holding = true;
+            
         }
-        if(ammo < maxAmmo && !isReloading)
+        if (holding)
+        {
+            strength += Time.deltaTime;
+            strength = Mathf.Clamp(strength, 0, 1);
+        }
+        if (Input.GetMouseButtonUp(0) && ammo > 0 && nextFire < Time.time && holding)
+        {
+            holding = false;
+            Shoot();
+            strength = 0f;
+        }
+        if (ammo < maxAmmo && !isReloading)
         {
             StartCoroutine(Reload());
         }
-
-        if(ammo > 0 && nextFire < Time.time)
-        {
-            sr.sprite = loadedBow;
-        }
-        if(ammo == 0 || nextFire > Time.time)
+        if (strength == 0)
         {
             sr.sprite = emptyBow;
         }
+        if(strength > 0.5f && strength < 1f)
+        {
+            sr.sprite = semiPulled;
+        }
+        if (strength == 1f)
+        {
+            sr.sprite = fullyPulled;
+        }
+
 
     }
     void Shoot()
     {
         GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
         Physics2D.IgnoreCollision(newArrow.GetComponent<Collider2D>(), shooter.GetComponent<Collider2D>());
-        newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
+        //newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * minLaunchForce;
+        newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce * strength;
 
         ammo--;
 

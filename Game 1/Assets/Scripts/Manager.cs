@@ -20,5 +20,9 @@ public class Manager : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SceneManager.LoadScene(2);
+        }
     }
 }

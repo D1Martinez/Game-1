@@ -65,7 +65,8 @@ public class Movement : MonoBehaviour
             rb.gravityScale = regularGravity;
         }
 
-        
+        //if ray down has tag/layer platform, 
+        //Physics2D.IgnoreCollision(oneself, with it, true)
 
     }
     private void FixedUpdate()

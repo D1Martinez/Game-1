@@ -7,6 +7,8 @@ TagManager:
   - Jumpable Floor
   - Jumpable Wall
   - Enemy
+  - Enemy Arrow
+  - Dead
   layers:
   - Default
   - TransparentFX
@@ -43,4 +45,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Walls
+    uniqueID: 1532121671
     locked: 0

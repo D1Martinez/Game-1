@@ -29,6 +29,9 @@ public class Archer : MonoBehaviour
     float delay;
     public LayerMask layers;
 
+    public float t = 1f;
+    public float arrowDirectness = 3.5f;
+
     void Start()
     {
         playerPos = GameObject.Find("Player").transform;
@@ -61,9 +64,13 @@ public class Archer : MonoBehaviour
     {
         //spray = Random.Range(-bloom, bloom);
 
+        float distance = Vector2.Distance(playerPos.position, transform.position);
+        distance /= 10f;
+        t = arrowDirectness / distance;
+
         Vector2 aimPoint;
-        aimPoint.x = (playerPos.position.x - shotPoint.position.x)/2f;
-        aimPoint.y = (playerPos.position.y - shotPoint.position.y)/2f + 9.81f;
+        aimPoint.x = ((playerPos.position.x - shotPoint.position.x)/2) * t;
+        aimPoint.y = ((playerPos.position.y - shotPoint.position.y)/2) * t + 9.81f/t;
 
         GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
         Physics2D.IgnoreCollision(newArrow.GetComponent<Collider2D>(), GetComponent<Collider2D>());

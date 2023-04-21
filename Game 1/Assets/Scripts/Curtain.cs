@@ -17,7 +17,6 @@ public class Curtain : MonoBehaviour
     {
         if (t < 1f)
         {
-            float x;
             t += Time.deltaTime / 5f;
             t = Mathf.Clamp(t, 0, 1);
             blackScreen.color = new Color(0, 0, 0, t * 255f);

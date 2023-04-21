@@ -19,6 +19,8 @@ public class Movement : MonoBehaviour
     public float downGravity = 6.5f;
     bool canJump = true;
 
+    public GameObject bow;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -92,6 +94,17 @@ public class Movement : MonoBehaviour
         if (collision.tag == "Jumpable Floor")
         {
             canJump = false;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.CompareTag("Enemy Arrow"))
+        {
+            animator.SetBool("Alive", false);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            gameObject.tag = "Dead";
+            bow.SetActive(false);
+            this.enabled = false;
         }
     }
 }

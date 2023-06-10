@@ -11,6 +11,8 @@ public class Door : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E) && inside)
         {
+            PlayerPrefs.SetFloat(otherScene, 1f);
+            PlayerPrefs.Save();
             SceneManager.LoadScene(otherScene);
         }
     }

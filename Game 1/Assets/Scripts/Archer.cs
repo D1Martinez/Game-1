@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Archer : MonoBehaviour
 {
-    Rigidbody2D rb;
-
     public Transform playerPos;
 
     Vector2 archer;
@@ -32,10 +30,11 @@ public class Archer : MonoBehaviour
     public float t = 1f;
     public float arrowDirectness = 3.5f;
 
+    //public AudioSource audio;
+
     void Start()
     {
         playerPos = GameObject.Find("Player").transform;
-        rb = GetComponent<Rigidbody2D>();
         ammo = maxAmmo;
         delay = Random.Range(0f, maxDelay);
     }
@@ -62,6 +61,8 @@ public class Archer : MonoBehaviour
     }
     void Shoot()
     {
+        //audio.Play();
+
         //spray = Random.Range(-bloom, bloom);
 
         float distance = Vector2.Distance(playerPos.position, transform.position);

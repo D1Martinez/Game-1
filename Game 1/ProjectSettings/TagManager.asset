@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Enemy Arrow
   - Dead
+  - Deadly
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Enemy
   - Enemy Arrow
   - Walls
-  - 
+  - Platform
   - 
   - 
   - 

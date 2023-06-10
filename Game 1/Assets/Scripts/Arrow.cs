@@ -28,7 +28,7 @@ public class Arrow : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //Death Animation, Fade  to black, Restart level.
+            transform.SetParent(collision.transform);
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Bow : MonoBehaviour
 {
@@ -27,11 +28,17 @@ public class Bow : MonoBehaviour
     bool holding = false;
     float strength = 0f;
 
+    public Slider slider;
+    public Gradient gradient;
+    public Image fill;
+
     private void Start()
     {
         ammo = maxAmmo;
         isReloading = false;
         //Cursor.visible = false;
+        slider.maxValue = launchForce;
+        fill.color = gradient.Evaluate(0f);
     }
 
     private void Update()
@@ -50,12 +57,18 @@ public class Bow : MonoBehaviour
         {
             strength += Time.deltaTime;
             strength = Mathf.Clamp(strength, 0, 1);
+            slider.gameObject.SetActive(true);
+            slider.value = strength * launchForce;
+            fill.color = gradient.Evaluate(slider.normalizedValue);
         }
         if (Input.GetMouseButtonUp(0) && ammo > 0 && nextFire < Time.time && holding)
         {
             holding = false;
             Shoot();
             strength = 0f;
+            slider.value = 0f;
+            fill.color = gradient.Evaluate(0f);
+            slider.gameObject.SetActive(false);
         }
         if (ammo < maxAmmo && !isReloading)
         {
